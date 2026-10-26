@@ -1,0 +1,641 @@
+
+/* ---------- 1. VARIABEL WARNA & FONT ---------- */
+:root {
+  --font-script: 'Parisienne', cursive;
+  --font-judul: 'Cormorant Garamond', serif;
+  --font-isi: 'Nunito', sans-serif;
+
+  --pink: #f6b9cb;
+  --pink-muda: #f8d7e0;
+  --pink-tua: #e8799f;
+  --krem: #fff0e3;
+  --amplop: #f186a6;
+  --marun: #5a0f1e;
+  --emas: #c9a24b;
+  --lebar-hp: 550px;
+}
+
+/* ---------- 2. DASAR ---------- */
+body {
+  font-family: var(--font-isi);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--marun);
+  background-color: #ffc9d9;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("background.jpeg") center / cover no-repeat;
+}
+
+/* Dipasang saat undangan belum dibuka: scroll dikunci */
+body.terkunci {
+  overflow: hidden;
+  height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-judul);
+  font-weight: 700;
+}
+
+/* Teks script untuk nama mempelai */
+.nama-script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 1.15;
+}
+
+/* ---------- 3. COVER ---------- */
+.cover {
+  min-height: 100vh;
+  max-width: var(--lebar-hp);
+  margin: 0 auto;
+  padding: 40px 20px;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.cover #nama-tamu {
+  font-family: var(--font-judul);
+  font-weight: 600;
+}
+
+/* ---------- 4. TOMBOL ---------- */
+.btn-tombol {
+  background: var(--marun);
+  color: var(--krem);
+  border: 0;
+  border-radius: 24px;
+  padding: 0 28px;
+  min-height: 46px;
+  font-weight: 700;
+}
+
+.btn-check:checked + .btn-tombol-outline {
+  background: var(--marun);
+  color: var(--krem);
+}
+
+.btn-tombol:hover,
+.btn-tombol:focus-visible {
+  background: #7a1230;
+  color: var(--krem);
+}
+
+.btn-tombol-outline {
+  background: transparent;
+  color: var(--marun);
+  border: 1px solid var(--marun);
+  border-radius: 22px;
+  padding: 0 12px;
+  min-height: 36px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-tombol-outline:hover,
+.btn-tombol-outline:focus-visible {
+  background: var(--marun);
+  color: var(--krem);
+}
+
+#acara,
+#hadiah {
+  background-color: var(--pink-muda);
+}
+#ucapan .container,
+#hadiah .container { padding: 0 8%; }
+
+.judul-seksi {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 2.2rem;
+  margin-bottom: 24px;
+}
+
+.tanggal {
+  font-family: var(--font-judul);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #b0456a;
+}
+#home .nama-script {
+  background: linear-gradient(90deg, var(--marun) 40%, var(--emas) 50%, var(--marun) 60%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: kilau 4s linear infinite;
+  padding: 0 0.15em 0.25em;
+}
+
+@keyframes kilau {
+  to { background-position: -200% 0; }
+}
+/* ---------- 6. COUNTDOWN ---------- */
+.kotak-hitung {
+  background: #fff;
+  border: 2px solid var(--emas);
+  border-radius: 12px;
+  padding: 8px 0;
+}
+
+.kotak-hitung span {
+  display: block;
+  font-family: var(--font-judul);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.kotak-hitung small {
+  font-size: 0.75rem;
+}
+
+/* ---------- 7. MEMPELAI ---------- */
+.bingkai-oval {
+  position: relative;
+  width: 100%;
+  max-width: 130px;
+  aspect-ratio: 375 / 666;
+  margin: 0 auto 4px;
+}
+
+#mempelai p.small { text-wrap: balance; }
+
+.bingkai-oval::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/bingkai-oval.png") center / 100% 100% no-repeat;
+}
+
+/* Foto berada di balik bingkai, mengisi lubang oval */
+.bingkai-oval img {
+  position: absolute;
+  top: 22%;
+  left: 13%;
+  width: 74%;
+  height: 61%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 30% top;
+}
+
+
+/* ---------- 8. KARTU ACARA & AMPLOP DIGITAL ---------- */
+.kartu-acara {
+  background: #fff;
+  border: 2px solid var(--emas);
+  border-radius: 18px;
+  padding: 16px 14px;
+  font-size: 0.85rem;
+}
+
+.kartu-acara h3 {
+  font-size: 1.4rem;
+}
+
+#hadiah .kartu-acara {
+  background: linear-gradient(135deg, var(--pink-muda), var(--pink));
+}
+
+/* ---------- 9. GALERI (CAROUSEL) ---------- */
+.carousel-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/bingkai-galeri.png") center / 100% 100% no-repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carousel-item {
+  padding: 26.1% 14.1% 22.1% 13.5%;
+}
+
+.carousel-item img {
+  aspect-ratio: 236 / 358;
+  object-fit: cover;
+  border-radius: 50%;
+  transform: scale(1.04);
+}
+
+.carousel-indicators {
+  position: static;
+  margin: 12px 0 0;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  margin: 0 4px;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--pink-tua);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 34px;
+  height: 34px;
+  background-color: var(--marun);
+  background-size: 50%;
+  border-radius: 50%;
+}
+
+/* ---------- 10. FORM RSVP & UCAPAN ---------- */
+.form-control,
+.form-select {
+  border-color: var(--pink-tua);
+  min-height: 44px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--marun);
+  box-shadow: 0 0 0 0.2rem rgba(232, 121, 159, 0.35);
+}
+
+.ucapan-item {
+  background: #fff;
+  border-left: 4px solid var(--pink-tua);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.ucapan-item p {
+  margin: 4px 0 0;
+}
+
+
+#acara .container { padding: 0; }
+/* ---------- 11. MENU BAWAH ---------- */
+.menu-bawah {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 398px;
+  height: 60px;
+  background: var(--marun);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
+}
+
+.menu-bawah a {
+  color: var(--pink);
+  text-decoration: none;
+  font-size: 0.75rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-bawah a:hover,
+.menu-bawah a:focus-visible {
+  color: var(--krem);
+  font-weight: 700;
+}
+
+/* ---------- 12. TOMBOL MUSIK ---------- */
+.btn-musik {
+  position: fixed;
+  bottom: 88px;
+  right: max(16px, calc(50% - 199px));
+  width: 46px;
+  height: 46px;
+  border: 2px solid var(--emas);  
+  border-radius: 50%;
+  background: var(--krem);
+  color: var(--marun);
+  font-size: 1.3rem;
+  z-index: 100;
+}
+
+
+.btn-musik.berputar {
+  animation: putar 4s linear infinite;
+}
+
+@keyframes putar {
+  to { transform: rotate(360deg); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-musik.berputar { animation: none; }
+}
+
+
+/* ---------- 14. ANIMASI BUKA UNDANGAN ---------- */
+.cover.menghilang {
+  opacity: 0;
+  transform: scale(1.2);
+  pointer-events: none;
+}
+
+
+@keyframes muncul {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+.isi.muncul {
+  animation: muncul 0.9s ease both;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .cover { transition: none; }
+  .isi.muncul { animation: none; }
+}
+
+/* ---------- 15. MODE SLIDE ---------- */
+
+.isi {
+  position: relative;
+  max-width: var(--lebar-hp);
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  overflow: hidden;
+  background: rgba(255, 246, 240, 0.82);
+  box-shadow: 0 0 30px rgba(90, 15, 30, 0.2);
+}
+
+/* Tiap slide ditumpuk, yang aktif saja yang terlihat */
+.halaman {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 24px 96px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(60px);
+  transition: transform 0.6s ease, opacity 0.6s ease, visibility 0s 0.6s;
+}
+
+.halaman.sebelum {
+  transform: translateX(-60px);
+}
+
+.halaman.aktif {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+/* Isi slide berada di tengah secara vertikal */
+.halaman > .container {
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Isi slide muncul bergantian setelah slide masuk */
+.halaman .container > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.halaman.aktif .container > * {
+  opacity: 1;
+  transform: none;
+}
+.halaman.aktif .container > *:nth-child(1) { transition-delay: 0.25s; }
+.halaman.aktif .container > *:nth-child(2) { transition-delay: 0.4s; }
+.halaman.aktif .container > *:nth-child(3) { transition-delay: 0.55s; }
+.halaman.aktif .container > *:nth-child(4) { transition-delay: 0.7s; }
+.halaman.aktif .container > *:nth-child(5) { transition-delay: 0.85s; }
+
+/* Menu bawah: slide yang sedang dibuka menyala */
+.menu-bawah a.aktif {
+  color: var(--krem);
+  font-weight: 700;
+  background: rgba(255, 240, 227, 0.16);
+  border-radius: 22px;
+}
+.ornamen {
+  position: absolute;
+  width: 220px;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: 0;
+  animation: goyang-ornamen 4s ease-in-out infinite alternate;
+}
+  @keyframes goyang-ornamen {
+  from { rotate: -5deg; scale: 1; }
+  to   { rotate: 5deg;  scale: 1.07; }
+}
+
+
+.ornamen-atas {
+  top: -10px;
+  left: -40px;
+}
+
+.ornamen-bawah {
+  bottom: 0px;
+  right: -40px;
+  transform: rotate(180deg);
+}
+
+/* ---------- 16. AMPLOP COVER ---------- */
+.amplop {
+  position: relative;
+  width: 280px;
+  height: 190px;
+  margin: 100px auto 0;
+  perspective: 800px;
+}
+
+/* Bagian belakang amplop (bagian dalam) */
+.amplop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+    background: var(--amplop);
+  filter: brightness(0.85);
+  border-radius: 4px;
+  z-index: 0;
+}
+
+/* Bunga di atas amplop (sementara dari CSS, nanti bisa diganti gambar) */
+.amplop-bunga {
+  position: absolute;
+  top: -70px;
+  left: 20px;
+  width: 240px;
+  height: 90px;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 70%, #c2185b 0 22px, transparent 23px),
+    radial-gradient(circle at 50% 50%, #f06292 0 28px, transparent 29px),
+    radial-gradient(circle at 80% 65%, #ad1457 0 24px, transparent 25px),
+    radial-gradient(circle at 35% 85%, #5f8f26 0 20px, transparent 21px),
+    radial-gradient(circle at 68% 90%, #4a741c 0 20px, transparent 21px);
+}
+
+/* Kartu undangan di dalam amplop */
+.amplop-kartu {
+  position: absolute;
+  left: 20px;
+  bottom: 12px;
+  width: 240px;
+  height: 170px;
+  background: var(--pink);
+  border: 3px solid var(--pink);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  color: var(--marun);
+  z-index: 1;
+  transition: transform 0.9s ease 0.7s;
+}
+
+/* Bagian depan amplop (bentuk huruf V, kartu terlihat di atasnya) */
+.amplop-depan {
+  position: absolute;
+  inset: 0;
+    background: var(--amplop);
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  z-index: 2;
+}
+
+/* Tutup amplop (segitiga) */
+.amplop-tutup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background: #faa9c5;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.7s ease, z-index 0s 0.35s;
+  z-index: 3;
+}
+
+/* Saat dibuka */
+.amplop.terbuka .amplop-tutup {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.amplop.terbuka .amplop-kartu {
+  transform: translateY(-120px);
+}
+
+.amplop::after {
+  content: "♥";
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  line-height: 1;
+  color: #d20303;
+  z-index: 4;
+  transition: opacity 0.3s ease;
+}
+
+.amplop.terbuka::after { opacity: 0; } 
+@media (prefers-reduced-motion: reduce) {
+  .amplop-kartu,
+  .amplop-tutup { transition: none; }
+}
+
+/* Ornamen versi cermin*/
+.ornamen-cermin.ornamen-atas {
+  left: auto;
+  right: -40px;
+  transform: scaleX(-1);
+}
+.ornamen-cermin.ornamen-bawah {
+  right: auto;
+  left: -40px;
+  transform: rotate(180deg) scaleX(-1);
+}
+
+/* Acara: label di kiri, titik dua sejajar, isi di kanan */
+.baris-info {
+  display: grid;
+    grid-template-columns: 78px 1fr;
+  column-gap: 8px;
+  padding: 6px 0;
+  text-align: left;
+  border-bottom: 1px dotted var(--pink-tua);
+}
+
+.baris-info b {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #7a4a55;
+}
+
+.baris-info b::after {
+  content: ":";
+}
+
+/* ---------- 18. BINGKAI RENDA (latar tiap slide) ---------- */
+.halaman {
+  background-image: url("../img/bingkai.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: calc(100% + 40px) calc(100% + 40px);
+}
+
+@keyframes goyang-bunga {
+  0%   { transform: rotate(-3deg) translateY(0); }
+  25%  { transform: rotate(0deg)  translateY(-4px); }
+  50%  { transform: rotate(3deg)  translateY(-6px); }
+  75%  { transform: rotate(0deg)  translateY(-3px); }
+  100% { transform: rotate(-3deg) translateY(0); }
+}
+
+.bunga-goyang {
+  transform-origin: 50% 85%;
+  animation: goyang-bunga 1.2s steps(1, end) infinite;
+}
+.kelopak {
+  position: absolute;
+  top: -30px;
+  color: var(--pink);
+  opacity: 0.7;
+  z-index: 50;
+  pointer-events: none;
+  animation: jatuh 10s linear infinite;
+}
+
+@keyframes jatuh {
+  to { transform: translateY(105vh) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bunga-goyang { animation: none; }
+  .kelopak { display: none; }
+}
+
